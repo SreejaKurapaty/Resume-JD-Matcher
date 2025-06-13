@@ -28,7 +28,7 @@ def get_llm_score(resume, jd):
     return round(score * 100, 2)
 
 # ========== Streamlit UI ==========
-st.title("📄 Resume vs Job Description Matcher")
+st.title("Resume vs Job Description Matcher")
 
 resume_file = st.file_uploader("Upload Resume (.docx)", type=["docx"])
 jd_text_input = st.text_area("Paste Job Description here", height=300)
