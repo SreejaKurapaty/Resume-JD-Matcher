@@ -34,15 +34,16 @@ resume_file = st.file_uploader("Upload Resume (.docx)", type=["docx"])
 jd_text_input = st.text_area("Paste Job Description here", height=300)
 
 if resume_file and jd_text_input.strip():
-    try:
-        resume_text = clean_text(read_docx(resume_file))
-        jd_text = clean_text(jd_text_input)
+    if st.button("Apply & Match"):
+        try:
+            resume_text = clean_text(read_docx(resume_file))
+            jd_text = clean_text(jd_text_input)
 
-        tfidf_score = get_tfidf_score(resume_text, jd_text)
-        llm_score = get_llm_score(resume_text, jd_text)
+            tfidf_score = get_tfidf_score(resume_text, jd_text)
+            llm_score = get_llm_score(resume_text, jd_text)
 
-        st.success("✅ Files processed successfully!")
-        st.write(f"📊 **TF-IDF Match Score:** {tfidf_score}%")
-        st.write(f"🤖 **LLM-based Match Score:** {llm_score}%")
-    except Exception as e:
-        st.error(f"Something went wrong: {e}")
+            st.success("✅ Files processed successfully!")
+            st.write(f"📊 **TF-IDF Match Score:** {tfidf_score}%")
+            st.write(f"🤖 **LLM-based Match Score:** {llm_score}%")
+        except Exception as e:
+            st.error(f"Something went wrong: {e}")
